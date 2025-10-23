@@ -3,35 +3,24 @@
 // GitHub: https://github.com/Sabourifar/DOHProxy
 // ==========================================
 
-// Define constant outside handler
+// Cloudflare DNS-over-HTTPS endpoint
 const DOH_ENDPOINT = 'https://cloudflare-dns.com/dns-query';
 
-// Static error response to avoid constructing on each error
-const ERROR_RESPONSE = new Response('Error fetching DoH server', {
-  status: 500,
-  headers: { 'Content-Type': 'text/plain' },
-});
-
-addEventListener('fetch', event => {
-  event.respondWith(handleRequest(event.request));
-});
-
-async function handleRequest(request) {
-  try {
-    // Build target URL with minimal processing
-    const targetUrl = DOH_ENDPOINT + (request.url.includes('?') ? request.url.slice(request.url.indexOf('?')) : '');
-
-    // Forward request with unchanged method, headers, and body
-    const response = await fetch(targetUrl, {
-      method: request.method,
-      headers: request.headers,
-      body: request.body,
-      redirect: 'follow',
-    });
-
-    // Return response directly
-    return response;
-  } catch {
-    return ERROR_RESPONSE;
-  }
-}
+// Export worker module with fetch handler
+export default {
+  async fetch(request) {
+    try {
+      // Extract query string from request URL and append to DoH endpoint
+      const targetUrl = DOH_ENDPOINT + (request.url.indexOf('?') >= 0 ? request.url.slice(request.url.indexOf('?')) : '');
+      
+      // Forward request to DoH server with original request properties
+      return await fetch(targetUrl, request);
+    } catch {
+      // Return error response if DoH request fails
+      return new Response('Error fetching DoH server', {
+        status: 500,
+        headers: { 'Content-Type': 'text/plain' },
+      });
+    }
+  },
+};
