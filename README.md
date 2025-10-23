@@ -33,8 +33,7 @@ You can manually deploy the worker by copying the code into the Cloudflare Worke
 1. Log in to your [Cloudflare dashboard](https://dash.cloudflare.com/).
 2. Navigate to the **Workers** section and click **Create a Worker**.
 3. Copy the code from `worker.js` in the repository and paste it into the script editor.
-4. Name your worker (e.g., `doh-proxy`).
-5. Click **Save and Deploy** to make the worker live.
+4. Click **Save and Deploy** to make the worker live.
 
 ### 3. Manual Deployment via Wrangler CLI
 
