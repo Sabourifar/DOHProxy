@@ -78,13 +78,6 @@ compatibility_date = "2025-10-24"
 
 Once deployed, your worker will proxy DNS-over-HTTPS requests to `https://cloudflare-dns.com/dns-query`. You can test it by sending a DoH request to the worker's URL with a valid DNS query (e.g., `?dns=...`).
 
-## Troubleshooting
-
-If the deploy button does not appear or work:
-- View the README on the [GitHub repository](https://github.com/Sabourifar/DOHProxy) in a browser to ensure proper rendering.
-- Disable any ad blockers or browser extensions that may block the button image (`https://deploy.workers.cloudflare.com/button`).
-- Verify the repository URL in the deploy button link is correct: `https://deploy.workers.cloudflare.com/?url=https://github.com/Sabourifar/DOHProxy`.
-
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request on the [GitHub repository](https://github.com/Sabourifar/DOHProxy).
