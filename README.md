@@ -46,23 +46,28 @@ For advanced users, you can deploy the worker using the Wrangler CLI.
 **Prerequisites:**
 - Install Node.js and npm.
 - Install Wrangler CLI by running:
+
   ```bash
   npm install -g @cloudflare/wrangler
   ```
+
 - Authenticate Wrangler with your Cloudflare account:
+
   ```bash
   wrangler login
   ```
 
 **Steps:**
 1. Clone the repository or create a new directory for your project:
+
    ```bash
    git clone https://github.com/Sabourifar/DOHProxy.git
    cd DOHProxy
    ```
+
    Alternatively, create a new directory and initialize a `wrangler.toml` file.
 
-2. Create a `wrangler.toml` configuration file in the project directory with the following content:
+3. Create a `wrangler.toml` configuration file in the project directory with the following content:
 
     ```toml
     name = "doh-proxy"
@@ -70,9 +75,9 @@ For advanced users, you can deploy the worker using the Wrangler CLI.
     compatibility_date = "2025-10-24"
     ```
 
-3. Ensure the `worker.js` file is in the project directory (available in the repository).
-4. (Optional) Modify the `DOH_ENDPOINT` constant in `worker.js` to use a different provider (see "Customizing the DoH Endpoint" below).
-5. Deploy the worker using Wrangler:
+4. Ensure the `worker.js` file is in the project directory (available in the repository).
+5. (Optional) Modify the `DOH_ENDPOINT` constant in `worker.js` to use a different provider (see "Customizing the DoH Endpoint" below).
+6. Deploy the worker using Wrangler:
 
    ```bash
    wrangler deploy
@@ -93,10 +98,12 @@ You can change the `DOH_ENDPOINT` constant in the `worker.js` file to any valid 
 To change the endpoint:
 1. Open the `worker.js` file.
 2. Update the `DOH_ENDPOINT` constant to your desired URL, e.g.:
+
    ```javascript
    const DOH_ENDPOINT = 'https://dns.google/dns-query';
    ```
-3. Save and redeploy the worker (via the dashboard or Wrangler CLI).
+
+4. Save and redeploy the worker (via the dashboard or Wrangler CLI).
 
 ## Usage
 
