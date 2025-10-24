@@ -73,11 +73,12 @@ For advanced users, you can deploy the worker using the Wrangler CLI.
 3. Ensure the `worker.js` file is in the project directory (available in the repository).
 4. (Optional) Modify the `DOH_ENDPOINT` constant in `worker.js` to use a different provider (see "Customizing the DoH Endpoint" below).
 5. Deploy the worker using Wrangler:
+
    ```bash
    wrangler deploy
    ```
 
-6. Once deployed, Wrangler will provide the URL for your worker.
+7. Once deployed, Wrangler will provide the URL for your worker.
 
 ## Customizing the DoH Endpoint
 
