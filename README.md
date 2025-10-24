@@ -64,11 +64,11 @@ For advanced users, you can deploy the worker using the Wrangler CLI.
 
 2. Create a `wrangler.toml` configuration file in the project directory with the following content:
 
-  ```toml
-  name = "doh-proxy"
-  main = "worker.js"
-  compatibility_date = "2025-10-24"
-  ```
+    ```toml
+    name = "doh-proxy"
+    main = "worker.js"
+    compatibility_date = "2025-10-24"
+    ```
 
 3. Ensure the `worker.js` file is in the project directory (available in the repository).
 4. (Optional) Modify the `DOH_ENDPOINT` constant in `worker.js` to use a different provider (see "Customizing the DoH Endpoint" below).
