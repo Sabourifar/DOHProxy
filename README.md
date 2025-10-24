@@ -1,8 +1,8 @@
-<xaiArtifact artifact_id="d10772f7-3328-4d11-8d02-1382a1893f94" artifact_version_id="2d8f4f57-bf85-40f3-ba91-5cdf7baf3336" title="README.md" contentType="text/markdown">
+<xaiArtifact artifact_id="d10772f7-3328-4d11-8d02-1382a1893f94" artifact_version_id="a100ab29-54e0-4fbc-80fb-7c9e856e1462" title="README.md" contentType="text/markdown">
 
 # DOHProxy
 
-A simple Cloudflare Worker that proxies DNS-over-HTTPS (DoH) requests to a configurable DoH endpoint, defaulting to Cloudflare's DNS service (`cloudflare-dns.com/dns-query`). This allows you to resolve DNS queries securely over HTTPS using any DoH provider or a custom endpoint.
+A high-performance and efficient Cloudflare Worker that proxies DNS-over-HTTPS (DoH) requests to a configurable DoH endpoint, defaulting to Cloudflare's DNS service (`cloudflare-dns.com/dns-query`). This enables secure and rapid DNS query resolution over HTTPS using any DoH provider or a custom endpoint.
 
 ## Features
 - Proxies DNS queries to a configurable DoH endpoint.
