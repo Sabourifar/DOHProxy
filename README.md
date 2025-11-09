@@ -1,120 +1,119 @@
-<xaiArtifact artifact_id="d10772f7-3328-4d11-8d02-1382a1893f94" artifact_version_id="a100ab29-54e0-4fbc-80fb-7c9e856e1462" title="README.md" contentType="text/markdown">
-
+<xaiArtifact artifact_id="d10772f7-3328-4d11-8d02-1382a1893f94" artifact_version_id="f8e1c5a2-9d3f-4b1e-9f2d-6a7b8c9d0e1f" title="README.md" contentType="text/markdown">
 # DOHProxy
 
-A high-performance and efficient Cloudflare Worker that proxies DNS-over-HTTPS (DoH) requests to a configurable DoH endpoint, defaulting to Cloudflare's DNS service (`cloudflare-dns.com/dns-query`). This enables secure and rapid DNS query resolution over HTTPS using any DoH provider or a custom endpoint.
+A minimal, high-performance Cloudflare Worker that forwards DNS-over-HTTPS (DoH) requests directly to Cloudflare's DoH endpoint (`cloudflare-dns.com/dns-query`).
+
+To use a different DoH provider, simply edit the URL in the code.
 
 ## Features
-- Proxies DNS queries to a configurable DoH endpoint.
-- Lightweight and easy to deploy.
-- Handles errors gracefully with a custom error response.
-- Supports changing the DoH endpoint to popular providers or a custom URL.
+
+- Zero-config proxy for DNS-over-HTTPS
+- Ultra-lightweight — just one `fetch()` call
+- Fully compatible with any DoH client
+- Easily customizable provider
 
 ## Setup Instructions
 
-There are three ways to deploy this Cloudflare Worker: using a one-click deploy button, manually pasting the code into the Cloudflare Workers dashboard, or using the Wrangler CLI.
-
 ### 1. Deploy with One-Click Button
 
-The easiest way to deploy this worker is by using the Deploy to Cloudflare Workers button below. This will guide you through the process of setting up the worker in your Cloudflare account.
+Click the button below to deploy instantly:
 
 [<img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare Workers" style="height: 40px;">](https://deploy.workers.cloudflare.com/?url=https://github.com/Sabourifar/DOHProxy)
 
 **Steps:**
-1. Click the "Deploy to Cloudflare Workers" button above.
-2. Log in to your Cloudflare account if prompted.
-3. Follow the on-screen instructions to configure and deploy the worker.
-4. Once deployed, your worker will be live and ready to proxy DoH requests.
-5. (Optional) To use a different DoH endpoint, edit the `DOH_ENDPOINT` constant in the worker code (see "Customizing the DoH Endpoint" below).
+1. Click the button above.
+2. Log in to Cloudflare (if needed).
+3. Name your worker (e.g., `doh-proxy`).
+4. Deploy — done in seconds!
 
-### 2. Manual Deployment via Cloudflare Workers Dashboard
+Your worker is now live and proxying DoH requests.
 
-You can manually deploy the worker by copying the code into the Cloudflare Workers dashboard.
+---
 
-**Steps:**
-1. Log in to your [Cloudflare dashboard](https://dash.cloudflare.com/).
-2. Navigate to the **Workers** section and click **Create a Worker**.
-3. Copy the code from `worker.js` in the repository and paste it into the script editor.
-4. (Optional) Modify the `DOH_ENDPOINT` constant to use a different provider (see "Customizing the DoH Endpoint" below).
-5. Name your worker (e.g., `doh-proxy`).
-6. Click **Save and Deploy** to make the worker live.
+### 2. Manual Deployment (Dashboard)
 
-### 3. Manual Deployment via Wrangler CLI
+1. Go to [Cloudflare Workers](https://dash.cloudflare.com/?to=/:account/workers)
+2. Click **Create a Worker**
+3. Delete the default code
+4. Paste this:
 
-For advanced users, you can deploy the worker using the Wrangler CLI.
+```js
+export default {
+	async fetch(request) {
+		return fetch(
+			`https://cloudflare-dns.com/dns-query${new URL(request.url).search}`,
+			{
+				method: request.method,
+				headers: request.headers,
+				body: request.body,
+			},
+		);
+	},
+};
+```
 
-**Prerequisites:**
-- Install Node.js and npm.
-- Install Wrangler CLI by running:
+5. Click **Save and Deploy**
 
-  ```bash
-  npm install -g @cloudflare/wrangler
-  ```
+---
 
-- Authenticate Wrangler with your Cloudflare account:
+### 3. Using Wrangler CLI
 
-  ```bash
-  wrangler login
-  ```
+```bash
+npm create cloudflare@latest doh-proxy
+cd doh-proxy
+```
 
-**Steps:**
-1. Clone the repository or create a new directory for your project:
+Replace `src/index.js` with:
 
-   ```bash
-   git clone https://github.com/Sabourifar/DOHProxy.git
-   cd DOHProxy
-   ```
+```js
+export default {
+	async fetch(request) {
+		return fetch(
+			`https://cloudflare-dns.com/dns-query${new URL(request.url).search}`,
+			{
+				method: request.method,
+				headers: request.headers,
+				body: request.body,
+			},
+		);
+	},
+};
+```
 
-   Alternatively, create a new directory and initialize a `wrangler.toml` file.
+Then:
 
-3. Create a `wrangler.toml` configuration file in the project directory with the following content:
+```bash
+wrangler deploy
+```
 
-    ```toml
-    name = "doh-proxy"
-    main = "worker.js"
-    compatibility_date = "2025-10-24"
-    ```
+## Change DoH Provider
 
-4. Ensure the `worker.js` file is in the project directory (available in the repository).
-5. (Optional) Modify the `DOH_ENDPOINT` constant in `worker.js` to use a different provider (see "Customizing the DoH Endpoint" below).
-6. Deploy the worker using Wrangler:
+Edit the URL in the code:
 
-   ```bash
-   wrangler deploy
-   ```
+```js
+// Change this line:
+`https://cloudflare-dns.com/dns-query${...}`
 
-7. Once deployed, Wrangler will provide the URL for your worker.
+// To Google:
+`https://dns.google/dns-query${...}`
 
-## Customizing the DoH Endpoint
+// Or Quad9:
+`https://dns.quad9.net/dns-query${...}`
+```
 
-You can change the `DOH_ENDPOINT` constant in the `worker.js` file to any valid DNS-over-HTTPS provider or a custom DoH server. By default, it uses Cloudflare's `https://cloudflare-dns.com/dns-query`. Some popular DoH providers include:
-
-- **Cloudflare**: `https://cloudflare-dns.com/dns-query`
-- **Google**: `https://dns.google/dns-query`
-- **Quad9**: `https://dns.quad9.net/dns-query`
-- **AdGuard**: `https://dns.adguard.com/dns-query`
-- **Custom**: Use any DoH-compliant server URL (e.g., a self-hosted DoH server).
-
-To change the endpoint:
-1. Open the `worker.js` file.
-2. Update the `DOH_ENDPOINT` constant to your desired URL, e.g.:
-
-   ```javascript
-   const DOH_ENDPOINT = 'https://dns.google/dns-query';
-   ```
-
-4. Save and redeploy the worker (via the dashboard or Wrangler CLI).
+Save and redeploy.
 
 ## Usage
 
-Once deployed, your worker will proxy DNS-over-HTTPS requests to the configured DoH endpoint. You can test it by sending a DoH request to the worker's URL with a valid DNS query (e.g., `?dns=...`).
+Send DoH requests to your worker URL:
 
-## Contributing
+```
+https://your-worker.your-subdomain.workers.dev/?dns=...
+```
 
-Contributions are welcome! Please open an issue or submit a pull request on the [GitHub repository](https://github.com/Sabourifar/DOHProxy).
+Works with Firefox, curl, `dog`, etc.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
+MIT — see [LICENSE](LICENSE)
 </xaiArtifact>
