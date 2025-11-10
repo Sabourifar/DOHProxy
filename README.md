@@ -34,23 +34,7 @@ Your worker is now live and proxying DoH requests.
 1. Go to [Cloudflare Workers](https://dash.cloudflare.com/?to=/:account/workers)
 2. Click **Create a Worker**
 3. Delete the default code
-4. Paste this:
-
-```js
-export default {
-	async fetch(request) {
-		return fetch(
-			`https://cloudflare-dns.com/dns-query${new URL(request.url).search}`,
-			{
-				method: request.method,
-				headers: request.headers,
-				body: request.body,
-			},
-		);
-	},
-};
-```
-
+4. Paste the worker script from the repository (`worker.js`)
 5. Click **Save and Deploy**
 
 ---
@@ -62,24 +46,7 @@ npm create cloudflare@latest doh-proxy
 cd doh-proxy
 ```
 
-Replace `src/index.js` with:
-
-```js
-export default {
-	async fetch(request) {
-		return fetch(
-			`https://cloudflare-dns.com/dns-query${new URL(request.url).search}`,
-			{
-				method: request.method,
-				headers: request.headers,
-				body: request.body,
-			},
-		);
-	},
-};
-```
-
-Then:
+Copy the worker script from the repository into `src/index.js`, then:
 
 ```bash
 wrangler deploy
@@ -87,30 +54,34 @@ wrangler deploy
 
 ## Change DoH Provider
 
-Edit the URL in the code:
+Edit the URL in the worker code:
 
 ```js
-// Change this line:
-`https://cloudflare-dns.com/dns-query${...}`
+// Change this:
+https://cloudflare-dns.com/dns-query
 
 // To Google:
-`https://dns.google/dns-query${...}`
+https://dns.google/dns-query
 
 // Or Quad9:
-`https://dns.quad9.net/dns-query${...}`
+https://dns.quad9.net/dns-query
 ```
 
 Save and redeploy.
 
 ## Usage
 
-Send DoH requests to your worker URL:
+Your worker accepts standard DoH requests at:
 
 ```
-https://your-worker.your-subdomain.workers.dev/?dns=...
+https://your-worker.your-subdomain.workers.dev/dns-query
 ```
 
-Works with Firefox, curl, `dog`, etc.
+Works with:
+- Browsers (set as DoH resolver)
+- Intra (Phone App)
+- `curl --doh-url https://your-worker...`
+- `dog`, `dig` (with DoH support), etc.
 
 ## License
 
