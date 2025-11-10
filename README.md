@@ -1,5 +1,4 @@
-<xaiArtifact artifact_id="d10772f7-3328-4d11-8d02-1382a1893f94" artifact_version_id="f8e1c5a2-9d3f-4b1e-9f2d-6a7b8c9d0e1f" title="README.md" contentType="text/markdown">
-## DOHProxy
+# DOHProxy
 
 A minimal, high-performance Cloudflare Worker that forwards DNS-over-HTTPS (DoH) requests directly to Cloudflare's DoH endpoint (`cloudflare-dns.com/dns-query`).
 
@@ -116,4 +115,3 @@ Works with Firefox, curl, `dog`, etc.
 ## License
 
 MIT — see [LICENSE](LICENSE)
-</xaiArtifact>
