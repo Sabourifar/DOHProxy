@@ -19,7 +19,7 @@ To use a different DoH provider, simply edit the **URL** in the worker code.
 
 Click the button below to deploy instantly:
 
-[\<img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare Workers" style="height: 40px;"\>](https://deploy.workers.cloudflare.com/?url=https://github.com/Sabourifar/DOHProxy)
+[<img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare Workers" style="height: 40px;">](https://deploy.workers.cloudflare.com/?url=https://github.com/Sabourifar/DOHProxy)
 
 **Steps:**
 
