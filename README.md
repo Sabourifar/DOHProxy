@@ -1,6 +1,6 @@
 # DOHProxy
 
-A minimal, high-performance Cloudflare Worker that forwards DNS-over-HTTPS (DoH) requests directly to **Cloudflare's DoH endpoint ([https://1.1.1.1/dns-query](https://1.1.1.1/dns-query))**.
+A minimal, high-performance Cloudflare Worker that forwards DNS-over-HTTPS (DoH) requests directly to **Cloudflare's DoH endpoint**.
 
 To use a different DoH provider, simply edit the **URL** in the worker code.
 
@@ -61,7 +61,7 @@ wrangler deploy
 
 To change the DoH provider, you need to edit the target **URL string** within the Worker's `fetch` function. The worker currently uses Cloudflare's IP-based endpoint, `https://1.1.1.1/dns-query`.
 
-To switch providers, replace this URL with your desired DoH endpoint:
+To switch providers, replace this URL with your desired DoH endpoint, examples:
 
 | Target Provider | URL to Use in Code |
 | :--- | :--- |
