@@ -12,7 +12,8 @@ To use a different DoH provider, simply edit the **URL** in the worker code.
 
 ## Setup Instructions
 ### 1. Deploy with One-Click Button
-Click the button below to deploy instantly:  
+Click the button below to deploy instantly:
+
 [<img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare Workers" style="height: 40px;">](https://deploy.workers.cloudflare.com/?url=https://github.com/Sabourifar/DOHProxy)
 
 **Steps:**
