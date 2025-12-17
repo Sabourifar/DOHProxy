@@ -43,7 +43,8 @@ Just change the provider URL and redeploy.
 
 ### 1. Deploy with One-Click Button
 
-[https://deploy.workers.cloudflare.com/?url=https://github.com/Sabourifar/DOHProxy](https://deploy.workers.cloudflare.com/?url=https://github.com/Sabourifar/DOHProxy)
+[<img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare Workers" style="height: 40px;">](https://deploy.workers.cloudflare.com/?url=https://github.com/Sabourifar/DOHProxy)
+
 
 ### 2. Manual Deployment (Dashboard)
 
