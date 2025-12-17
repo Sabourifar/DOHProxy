@@ -1,7 +1,3 @@
-Here’s a **full updated README** with a short explanation of *why we used JavaScript instead of Rust* on Cloudflare Workers:
-
----
-
 # DOHProxy
 
 A minimal, high‑performance Cloudflare Worker that forwards DNS‑over‑HTTPS (DoH) requests directly to **Cloudflare’s DoH endpoint**.
