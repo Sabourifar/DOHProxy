@@ -46,8 +46,8 @@ Cloudflare Workers run JS **natively on V8** — zero startup penalty. Rust requ
 | ☁️ **Cloudflare** *(default)* | `https://1.1.1.1/dns-query` | Max speed & privacy |
 | 🛡️ **Cloudflare Malware** | `https://1.1.1.2/dns-query` | Blocks malware & phishing |
 | 👨‍👩‍👧 **Cloudflare Family** | `https://1.1.1.3/dns-query` | + Adult content filtering |
-| 🔵 **Google** | `https://dns.google/dns-query` | Google Public DNS |
-| 🔒 **Quad9** | `https://dns.quad9.net/dns-query` | Threat-blocking DNS |
+| 🔵 **Google** | `https://8.8.8.8/dns-query` | Google Public DNS |
+| 🔒 **Quad9** | `https://9.9.9.9/dns-query` | Quad9 Public DNS |
 
 ---
 
